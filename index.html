@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YANIV HARUSH | Creative AI Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at 10% 20%, #0b1620, #1c2838);
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #00ffff;
+    }
+    nav a {
+      margin-left: 30px;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 500;
+    }
+    .sidebar {
+      width: 240px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding-top: 100px;
+      background: rgba(255, 255, 255, 0.02);
+      border-right: 1px solid #00ffe7;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 10;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0 20px;
+    }
+    .sidebar li {
+      margin: 16px 0;
+    }
+    .sidebar a {
+      text-decoration: none;
+      color: #00ffff;
+      font-weight: 600;
+    }
+    .content {
+      margin-left: 260px;
+      padding-top: 120px;
+      padding: 40px;
+    }
+    .hero h1 {
+      font-size: 3.5em;
+      background: linear-gradient(90deg, #00ffe7, #00b4d8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.2em;
+      color: #c0eaff;
+    }
+    .button {
+      margin-top: 30px;
+      padding: 12px 26px;
+      background: #00ffff;
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    /* Canvas particle animation */
+    #sparkCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="sparkCanvas"></canvas>
+
+<header>
+  <div class="logo">✦ YANIV SPARK</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<div class="sidebar">
+  <ul>
+    <li><a href="projects.html#children">📚 Children's Books</a></li>
+    <li><a href="projects.html#animations">🎞️ AI Animations</a></li>
+    <li><a href="projects.html#commercials">📺 Commercials</a></li>
+    <li><a href="projects.html#voices">🗣️ Voice Imitations</a></li>
+    <li><a href="projects.html#podcast">🎙️ Podcast</a></li>
+    <li><a href="#">🧠 Storytelling for Brands</a></li>
+    <li><a href="#">💡 Explainer Videos</a></li>
+    <li><a href="#">🎬 Script Writing</a></li>
+    <li><a href="#">🎤 Voiceover Projects</a></li>
+    <li><a href="#">📱 Social Media Reels</a></li>
+  </ul>
+</div>
+
+<div class="content">
+  <div class="hero">
+    <h1>YANIV HARUSH</h1>
+    <p>Creative Storyteller, AI Content Creator, and Animated Presentation Expert</p>
+    <a href="projects.html" class="button">Explore Projects</a>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById("sparkCanvas");
+const ctx = canvas.getContext("2d");
+let w, h;
+let particles = [];
+
+function resizeCanvas() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+function createParticles() {
+  particles = [];
+  for (let i = 0; i < 70; i++) {
+    particles.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      r: Math.random() * 2 + 1,
+      a: Math.random() * Math.PI * 2
+    });
+  }
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, w, h);
+  for (let p of particles) {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(0, 255, 255, 0.7)";
+    ctx.fill();
+    p.x += p.vx;
+    p.y += p.vy;
+    p.a += 0.02;
+    p.r = 1.5 + Math.sin(p.a) * 0.5;
+    if (p.x < 0 || p.x > w || p.y < 0 || p.y > h) {
+      p.x = Math.random() * w;
+      p.y = Math.random() * h;
+    }
+  }
+  requestAnimationFrame(drawParticles);
+}
+
+createParticles();
+drawParticles();
+</script>
+
+
+<script>
+const canvas = document.getElementById("sparkCanvas");
+const ctx = canvas.getContext("2d");
+let w, h;
+let particles = [];
+
+function resizeCanvas() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+function createParticles(count = 80) {
+  let list = [];
+  for (let i = 0; i < count; i++) {
+    list.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.8,
+      vy: (Math.random() - 0.5) * 0.8,
+      r: Math.random() * 2 + 1,
+      life: 200 + Math.random() * 100,
+    });
+  }
+  return list;
+}
+
+function explode(x, y) {
+  const fragments = [];
+  for (let i = 0; i < 10; i++) {
+    fragments.push({
+      x,
+      y,
+      vx: (Math.random() - 0.5) * 2,
+      vy: (Math.random() - 0.5) * 2,
+      r: Math.random() * 1.2 + 0.3,
+      life: 50 + Math.random() * 50
+    });
+  }
+  particles.push(...fragments);
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, w, h);
+  for (let i = particles.length - 1; i >= 0; i--) {
+    let p = particles[i];
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(0,255,255,0.7)";
+    ctx.fill();
+
+    p.x += p.vx;
+    p.y += p.vy;
+    p.life--;
+
+    for (let j = 0; j < particles.length; j++) {
+      if (i !== j) {
+        let q = particles[j];
+        let dx = p.x - q.x;
+        let dy = p.y - q.y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 4 && Math.random() < 0.01) {
+          explode(p.x, p.y);
+        }
+      }
+    }
+
+    if (p.life <= 0) {
+      particles.splice(i, 1);
+    }
+  }
+  requestAnimationFrame(drawParticles);
+}
+
+particles = createParticles();
+drawParticles();
+</script>
+
+</body>
+</html>
